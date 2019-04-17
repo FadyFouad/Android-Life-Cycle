@@ -4,11 +4,12 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.PersistableBundle
 import android.text.method.ScrollingMovementMethod
+import android.util.Log
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ScrollView
-import android.widget.TextView
+import android.widget.*
+import kotlinx.android.synthetic.main.activity_main.*
+
+private const val TEXT_CONTENTs = "textContent"
 
 class MainActivity : AppCompatActivity() {
 
@@ -46,32 +47,45 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onStart() {
+        Log.d("mainActivity","onStart : Called")
         super.onStart()
     }
 
-    override fun onRestoreInstanceState(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
-        super.onRestoreInstanceState(savedInstanceState, persistentState)
+    override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
+        Log.d("mainActivity","onRestoreInstanceState : Called")
+        super.onRestoreInstanceState(savedInstanceState)
+        val savedText = savedInstanceState?.getString(TEXT_CONTENTs,"")
+        textView?.text = savedText
+
+        Toast.makeText(this,"Call",Toast.LENGTH_LONG).show()
     }
     override fun onResume() {
+        Log.d("mainActivity","onResume : Called")
         super.onResume()
     }
 
     override fun onPause() {
+        Log.d("mainActivity","onPause : Called")
         super.onPause()
     }
-    override fun onSaveInstanceState(outState: Bundle?, outPersistentState: PersistableBundle?) {
-        super.onSaveInstanceState(outState, outPersistentState)
+    override fun onSaveInstanceState(outState: Bundle?) {
+        Log.d("mainActivity","onSaveInstanceState : Called")
+        super.onSaveInstanceState(outState)
+        outState?.putString(TEXT_CONTENTs,textView?.text.toString())
     }
 
     override fun onStop() {
+        Log.d("mainActivity","onStop : Called")
         super.onStop()
     }
 
     override fun onRestart() {
+        Log.d("mainActivity","onRestart : Called")
         super.onRestart()
     }
 
     override fun onDestroy() {
+        Log.d("mainActivity","onDestroy : Called")
         super.onDestroy()
     }
 }
