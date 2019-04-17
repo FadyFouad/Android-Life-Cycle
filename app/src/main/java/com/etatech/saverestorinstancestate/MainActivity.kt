@@ -10,6 +10,7 @@ import android.widget.*
 import kotlinx.android.synthetic.main.activity_main.*
 
 private const val TEXT_CONTENTs = "textContent"
+private const val COUNTER = "counter"
 
 class MainActivity : AppCompatActivity() {
 
@@ -56,8 +57,8 @@ class MainActivity : AppCompatActivity() {
         super.onRestoreInstanceState(savedInstanceState)
         val savedText = savedInstanceState?.getString(TEXT_CONTENTs,"")
         textView?.text = savedText
-
-        Toast.makeText(this,"Call",Toast.LENGTH_LONG).show()
+        counter= savedInstanceState?.getInt(COUNTER,0)!!
+//        counter = count
     }
     override fun onResume() {
         Log.d("mainActivity","onResume : Called")
@@ -72,6 +73,7 @@ class MainActivity : AppCompatActivity() {
         Log.d("mainActivity","onSaveInstanceState : Called")
         super.onSaveInstanceState(outState)
         outState?.putString(TEXT_CONTENTs,textView?.text.toString())
+        outState?.putInt(COUNTER,counter)
     }
 
     override fun onStop() {
